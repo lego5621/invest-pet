@@ -1,21 +1,26 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "eslint": "^8.47.0",
-    "prettier": "^3.0.2",
-    "tsconfig": "*",
-    "turbo": "latest"
-  },
-  "name": "invest-pet",
-  "packageManager": "yarn@1.22.19",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
+		"client": "yarn workspace client",
+		"server": "yarn workspace server",
+		"ui": "yarn workspace ui"
+	},
+	"devDependencies": {
+		"eslint": "^8.47.0",
+		"prettier": "^3.0.2",
+		"tsconfig": "*",
+		"turbo": "latest"
+	},
+	"name": "invest-pet",
+	"packageManager": "yarn@1.22.19",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"prettier": "@vercel/style-guide/prettier"
+
 }
