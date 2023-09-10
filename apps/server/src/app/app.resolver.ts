@@ -11,6 +11,8 @@ import {
   RecommendationPriceTargets,
 } from '../recommendation-price-targets';
 import { InfoSummaryService, InfoSummary } from '../info-summary';
+import { MainList, MainListService } from '../main-list';
+import { SearchService, SearchItem } from '../search';
 
 @Resolver()
 export class AppResolver {
@@ -22,6 +24,8 @@ export class AppResolver {
     private readonly recommendationService: RecommendationService,
     private readonly recommendationPriceTargetsService: RecommendationPriceTargetsService,
     private readonly infoSummaryService: InfoSummaryService,
+    private readonly mainListService: MainListService,
+    private readonly searchService: SearchService,
   ) {}
 
   @Query(() => [Earnings])
@@ -121,6 +125,28 @@ export class AppResolver {
     const infoSummary = await this.infoSummaryService.getInfoSummary(ticker);
 
     await this.cacheManager.set(`${ticker}.infoSummary`, infoSummary);
+
+    return infoSummary;
+  }
+
+  @Query(() => [MainList])
+  async mainList() {
+    const cache = await this.cacheManager.get(`main-list`);
+
+    if (cache) {
+      return cache;
+    }
+
+    const infoSummary = await this.mainListService.getList();
+
+    await this.cacheManager.set(`main-list`, infoSummary);
+
+    return infoSummary;
+  }
+
+  @Query(() => [SearchItem])
+  async search(@Args('ticker', { type: () => String }) ticker: string) {
+    const infoSummary = await this.searchService.search(ticker);
 
     return infoSummary;
   }
