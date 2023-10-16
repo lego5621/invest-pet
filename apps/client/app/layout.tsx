@@ -1,3 +1,8 @@
+'use client';
+import { NextUIProvider } from '@nextui-org/react';
+
+import './globals.css';
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +10,10 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {' '}
+        <NextUIProvider>{children}</NextUIProvider>
+      </body>
     </html>
   );
 }
